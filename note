@@ -1,0 +1,11 @@
+
+Failures:
+
+  1) #Train #update updates a train by id
+     Failure/Error: expect(train.name).to(eq("Red"))
+     
+       expected: "Red"
+            got: "Green"
+     
+       (compared using ==)
+     # ./spec/train_spec.rb:55:in `block (3 levels) in <top (required)>'
