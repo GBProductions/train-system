@@ -28,7 +28,7 @@ class City
 
   def save
     result = DB.exec("INSERT INTO cities (name) VALUES ('#{@name}') RETURNING id;")
-    id = result.first.fetch('id').to_i
+    @id = result.first.fetch('id').to_i
   end
 
   def self.clear
@@ -48,7 +48,7 @@ class City
 
   def update(name)
     @name = name
-    DB.exec("UPDATE cities SET name = '#{name}' WHERE id = #{@id};")
+    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
   end
 
   def delete

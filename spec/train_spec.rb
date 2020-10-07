@@ -39,9 +39,9 @@ describe('#Train') do
 
   describe('.find') do
     it('find a train by id') do
-      train = Train.new('Green', nil)
+      train = Train.new({name:'Green', id:nil})
       train.save()
-      train2 = Train.new('Yellow', nil)
+      train2 = Train.new({name:'Yellow', id:nil})
       train2.save()
       expect(Train.find(train.id)).to(eq(train))
     end
@@ -49,7 +49,7 @@ describe('#Train') do
   
   describe('#update') do
     it("updates a train by id") do
-      train = Train.new({:name => "Green" :id => nil})
+      train = Train.new({:name => "Green", :id => nil})
       train.save()
       train.update("Red")
       expect(train.name).to(eq("Red"))

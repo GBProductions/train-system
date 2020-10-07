@@ -39,9 +39,9 @@ describe('#City') do
 
   describe('.find') do
     it('find a city by id') do
-      city = City.new('Seattle', nil)
+      city = City.new({name:'Seattle', id:nil})
       city.save()
-      city2 = City.new('Portland', nil)
+      city2 = City.new({name:'Portland', id:nil})
       city2.save()
       expect(City.find(city.id)).to(eq(city))
     end
@@ -49,7 +49,7 @@ describe('#City') do
 
   describe('#update') do
   it("updates a city by id") do
-    city = City.new({:name => "Seattle" :id => nil})
+    city = City.new({:name => "Seattle", :id => nil})
     city.save()
     city.update("Yakima")
     expect(city.name).to(eq("Yakima"))
