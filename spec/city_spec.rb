@@ -51,8 +51,19 @@ describe('#City') do
   it("updates a city by id") do
     city = City.new({:name => "Seattle", :id => nil})
     city.save()
-    city.update("Yakima")
+    city.update({name: "Yakima"})
     expect(city.name).to(eq("Yakima"))
+  end
+end
+
+describe('#update') do
+  it("adds a train to a city in the stop table") do
+    train = Train.new({:name => "Green", :id => nil})
+    train.save()
+    city = City.new({name: 'Portland', id: nil})
+    city.save
+    city.update({train_name: "Green"})
+    expect(city.trains).to(eq([train]))
   end
 end
 
