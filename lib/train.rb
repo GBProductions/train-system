@@ -11,10 +11,20 @@ class Train
   def ==(train_to_compare)
     if train_to_compare != nil
       (self.name() == train_to_compare.name())
+    else
+      nil
+    end
   end
 
   def self.all
-    @@trains.values()
+    returned_trains = DB.exec("SELECT * FROM trains;")
+    trains = []
+    returned_trains.each() do |train|
+      name = train.fetch("name")
+      id = train.fetch("id").to_i()
+      trains.push(Train.new({:name => name, :id => id}))
+    end
+    trains
   end
 
   def save
@@ -27,8 +37,14 @@ class Train
   end
 
   def self.find(id)
-    @@trains [id]
-    @@total_rows = 0
+    train = DB.exec("SELECT * FROM trains WHERE id = #{id};").first()
+    if train
+      name = train.fetch("name")
+      id = train.fetch("id").to_i
+      Train.new({:name => name, :id => id})
+    else
+      nil
+    end
   end
 
   def update(name)
@@ -41,9 +57,16 @@ class Train
   end
 
   def cities
-    City.find_by_train(self.id)
+    cities = []
+    returned_city_ids = DB.exec("SELECT city_id FROM stops WHERE train_id = #{@id}") # Will give an array of city ids
+    if returned_city_ids!= nil
+      returned_city_ids.each do |city_id|
+        id = city_id.to_i
+        name = DB.exec("SELECT name from cities WHERE id = #{id};").first
+        cities.push(City.new({name: name, id:id}))
+      end
+    end
+    cities
   end
 
 end
-
-
