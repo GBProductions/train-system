@@ -13,7 +13,7 @@ get('/') do
 end
 
 get('/home') do
-  erb(:index)
+  erb(:home)
 end
 
 get('/trains') do
@@ -26,10 +26,34 @@ get('/cities') do
   erb(:cities)
 end
 
-get('/trains.new') do
+get('/trains/new') do
   erb(:new_train)
 end
 
-get('/cities.new') do
+get('/cities/new') do
   erb(:new_city)
+end
+
+post('/trains') do
+  name = params[:train_name]
+  train = Train.new({name: name, id: nil})
+  train.save
+  redirect to('/trains')
+end
+
+post('/cities') do
+  name = params[:city_name]
+  city = City.new({name: name, id: nil})
+  city.save
+  redirect to('/cities')
+end
+
+get('/trains/:id') do
+  @trains = Train.find(params[:id].to_i())
+  erb(:train)
+end
+
+get('/cities/:id') do
+  @cities = City.find(params[:id].to_i())
+  erb(:city)
 end
