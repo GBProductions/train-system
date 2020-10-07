@@ -26,8 +26,8 @@ _Train System is a program to map a train system, allowing train system operator
 | 2 | Train system operatpr can create, read, update, delete, and list citites where the trains will stop. |  Create a City class and give it it full CRUD functionality. |
 | 3 | Train riders can view a train to see the cities where the train stops|  Create a method for the Train class that lists all cities the train stops at.|
 | 4 | Train riders can view a city and see which trains come to it. | Create a method for the City class that lists all trains that come to it.|
-| 5 | Train riders can see a timetable that shows what time each train stops in each city| |
-| 6 | | Train riders can purchase a ticket in a particular city for a particular train so that the rider can get on and off in any city the train travels. |
+| 5 | Train riders can see a timetable that shows what time each train stops in each city| Create a method for Trains that lists all the cities it goes to with corresponding times.|
+| 6 | Train riders can purchase a ticket in a particular city for a particular train so that the rider can get on and off in any city the train travels. |
 
 ## Known Bugs
 
