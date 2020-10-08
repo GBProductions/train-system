@@ -2,6 +2,7 @@ require('sinatra')
 require('sinatra/reloader')
 require('./lib/city')
 require('./lib/train')
+require('./lib/timetable')
 require('pry')
 also_reload('lib/**/*.rb')
 require("pg")
@@ -24,6 +25,12 @@ end
 get('/cities') do
   @cities = City.all
   erb(:cities)
+end
+
+get('/timetable') do
+  @timetable = Timetable.new
+  # @timetable.get_stops
+  erb(:timetable)
 end
 
 get('/trains/new') do
@@ -82,8 +89,8 @@ patch('/trains/:id') do
   @train = Train.find(params[:id].to_i)
   if params[:train_name]
     @train.update({name: params[:train_name]})
-  elsif params[:city_name]
-    @train.update({city_name: params[:city_name]})
+  elsif params[:city_name] && [:time]
+    @train.update({city_name: params[:city_name], time: params[:time]})
   end
   redirect to ('/trains')
 end

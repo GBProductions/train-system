@@ -1,0 +1,18 @@
+<h1>RAD Train System Timetable</h1>
+
+<table>
+  <tr>
+    <th>Train</th>
+    <th>City</th>
+    <th>Departure</th>
+  </tr>
+  <% @timetable.get_names.each do |row| %>
+    <tr>
+      <td><%= row['train'] %></td> 
+      <td><%= row['city'] %></td> 
+      <td><%= row['time'] %></td> 
+    </tr>
+  <% end %>
+</table>
+
+<a href="/home">Return to Train Station Home</a>

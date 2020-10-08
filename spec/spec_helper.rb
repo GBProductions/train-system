@@ -2,6 +2,7 @@ require 'rspec'
 require 'pg'
 require 'train'
 require 'city'
+require 'timetable'
 require 'pry'
 
 DB = PG.connect({:dbname => 'train_database_test'})
