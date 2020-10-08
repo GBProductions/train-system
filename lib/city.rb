@@ -16,7 +16,7 @@ class City
   end
 
   def self.all
-    returned_cities = DB.exec("SELECT * FROM cities;")
+    returned_cities = DB.exec("SELECT * FROM cities ORDER BY name ASC;")
     cities = []
     returned_cities.each do |city|
       name = city.fetch('name')
@@ -57,15 +57,17 @@ class City
       DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
     elsif (attributes.has_key?(:train_name)) && (attributes.fetch(:train_name) != nil)
       train_name = attributes.fetch(:train_name)
+      time = attributes.fetch(:time)
       train = DB.exec("SELECT * FROM trains WHERE lower(name)='#{train_name.downcase}';").first
       if train != nil
-        DB.exec("INSERT INTO stops (train_id, city_id) VALUES (#{train['id'].to_i}, #{@id});")
+        DB.exec("INSERT INTO stops (train_id, city_id, departure) VALUES (#{train['id'].to_i}, #{@id}, #{time});")
       end
     end
   end
 
   def delete
     DB.exec("DELETE FROM cities WHERE id = #{@id};")
+    DB.exec("DELETE FROM stops WHERE city_id = #{@id};")
   end
 
   def trains

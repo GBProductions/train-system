@@ -17,7 +17,7 @@ class Train
   end
 
   def self.all
-    returned_trains = DB.exec("SELECT * FROM trains;")
+    returned_trains = DB.exec("SELECT * FROM trains ORDER BY name ASC;")
     trains = []
     returned_trains.each() do |train|
       name = train.fetch("name")
@@ -63,6 +63,7 @@ class Train
 
   def delete
     DB.exec("DELETE FROM trains WHERE id = #{@id};")
+    DB.exec("DELETE FROM stops WHERE train_id = #{@id};")
   end
 
   def cities

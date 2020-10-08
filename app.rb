@@ -79,8 +79,8 @@ patch('/cities/:id') do
   @city = City.find(params[:id].to_i)
   if params[:city_name]
     @city.update({name: params[:city_name]})
-  elsif params[:train_name]  
-    @city.update({train_name: params[:train_name]})
+  elsif params[:train_name] && [:time]
+    @city.update({train_name: params[:train_name], time: params[:time]})
   end
   redirect to ('/cities')
 end
