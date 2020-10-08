@@ -70,13 +70,21 @@ end
 
 patch('/cities/:id') do
   @city = City.find(params[:id].to_i)
-  @city.update(params[:name])
+  if params[:city_name]
+    @city.update({name: params[:city_name]})
+  elsif params[:train_name]  
+    @city.update({train_name: params[:train_name]})
+  end
   redirect to ('/cities')
 end
 
 patch('/trains/:id') do
   @train = Train.find(params[:id].to_i)
-  @train.update(params[:name])
+  if params[:train_name]
+    @train.update({name: params[:train_name]})
+  elsif params[:city_name]
+    @train.update({city_name: params[:city_name]})
+  end
   redirect to ('/trains')
 end
 
@@ -91,3 +99,4 @@ delete('/trains/:id') do
   @train.delete
   redirect to ('/trains')
 end
+
